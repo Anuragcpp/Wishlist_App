@@ -17,15 +17,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.isTraceInProgress
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.wishlistapp.data.DummyWishList
+import com.example.wishlistapp.data.Wish
 
 @Composable
-fun HomeView(modifier: Modifier = Modifier) {
+fun HomeView(
+    navigateToAddWish : () -> Unit,
+    viewModel: WishViewModel
+) {
 
     val context = LocalContext.current
 
@@ -41,7 +47,7 @@ fun HomeView(modifier: Modifier = Modifier) {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = { navigateToAddWish() },
                 modifier = Modifier.padding(all = 20.dp),
                 containerColor = Color.Black,
                 contentColor = Color.White,
@@ -51,13 +57,14 @@ fun HomeView(modifier: Modifier = Modifier) {
         }
     ) {
 
+        val wishlist = viewModel.getAllWishes.collectAsState(initial = listOf())
         LazyColumn (
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
 
-            items(DummyWishList.wishList){
+            items(wishlist.value){
                 wish -> 
                 WishItem(wish = wish) {}
             }
@@ -67,7 +74,7 @@ fun HomeView(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun WishItem(wish : Wish , onClick : () -> Unit) {
+fun WishItem(wish : Wish, onClick : () -> Unit) {
 
     Card(
         modifier = Modifier
