@@ -7,54 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "wish-table")
 data class Wish(
     @PrimaryKey(autoGenerate = true)
-    val id : Long = 0L,
+    val id : String,
     @ColumnInfo(name = "wish-title")
     val title : String = "",
     @ColumnInfo(name = "wish-desc")
     val description : String = ""
 )
 
-object DummyWishList {
-    val wishList = listOf(
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        ),
-        Wish(
-            title = "Google watech",
-            description = "An android watch"
-        )
-    )
-}
